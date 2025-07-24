@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Sales\Block\Order\History">
+        <plugin name="magoarab_ordertracking_add_track_button" type="MagoArab\OrderTracking\Plugin\Sales\Block\Order\History" sortOrder="10"/>
+    </type>
+    
+    <!-- إضافة إعداد للـ Tracking Block -->
+    <type name="MagoArab\OrderTracking\Block\Tracking">
+        <arguments>
+            <argument name="sessionManager" xsi:type="object">Magento\Framework\Session\SessionManagerInterface</argument>
+        </arguments>
+    </type>
+</config>

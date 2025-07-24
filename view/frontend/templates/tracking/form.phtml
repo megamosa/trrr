@@ -1,0 +1,159 @@
+<?php
+$helper = $block->getHelper();
+$order = $block->getData('order');
+$orders = $block->getData('orders');
+$trackingType = $block->getData('tracking_type');
+$trackingValue = $block->getData('tracking_value');
+$mathCaptcha = $block->generateMathCaptcha();
+?>
+
+<div class="magoarab-ordertracking">
+    <div class="tracking-header">
+        <img src="<?= $block->getViewFileUrl('MagoArab_OrderTracking::images/delivery-truck.svg') ?>" alt="Delivery Truck" class="tracking-icon" />
+        <div class="tracking-title-container">
+            <h1><?= $block->escapeHtml($helper->getTitle()) ?></h1>
+            <p class="tracking-description"><?= $block->escapeHtml($helper->getDescription()) ?></p>
+        </div>
+    </div>
+    
+    <div class="tracking-form">
+        <form class="form" action="<?= $block->escapeUrl($block->getFormAction()) ?>" method="post" id="tracking-form">
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="fieldset">
+                <div class="field tracking-type">
+                    <label class="label" for="tracking_type">
+                        <span><?= $block->escapeHtml(__('Track By')) ?></span>
+                    </label>
+                    <div class="control">
+                        <select name="tracking_type" id="tracking_type" class="select">
+                            <?php if ($helper->isOrderIdTrackingAllowed()): ?>
+                                <option value="order_id" <?= $trackingType == 'order_id' ? 'selected' : '' ?>>
+                                    <?= $block->escapeHtml(__('Order ID')) ?>
+                                </option>
+                            <?php endif; ?>
+                            <?php if ($helper->isEmailTrackingAllowed()): ?>
+                                <option value="email" <?= $trackingType == 'email' ? 'selected' : '' ?>>
+                                    <?= $block->escapeHtml(__('Email')) ?>
+                                </option>
+                            <?php endif; ?>
+                            <?php if ($helper->isMobileTrackingAllowed()): ?>
+                                <option value="mobile" <?= $trackingType == 'mobile' ? 'selected' : '' ?>>
+                                    <?= $block->escapeHtml(__('Mobile Number')) ?>
+                                </option>
+                            <?php endif; ?>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="field tracking-value">
+                    <label class="label" for="tracking_value">
+                        <span><?= $block->escapeHtml(__('Enter Value')) ?></span>
+                    </label>
+                    <div class="control">
+                        <input type="text" name="tracking_value" id="tracking_value" 
+                               value="<?= $block->escapeHtmlAttr($trackingValue) ?>" 
+                               class="input-text" required>
+                    </div>
+                </div>
+                
+                <div class="field math-captcha" id="math-captcha-field" style="display: none;">
+                    <label class="label" for="math_captcha">
+                        <span><?= $block->escapeHtml(__('Security Check')) ?></span>
+                    </label>
+                    <div class="control">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                            <span style="font-size: 16px; font-weight: bold;"><?= $mathCaptcha['question'] ?></span>
+                            <input type="number" name="math_captcha" id="math_captcha" 
+                                   class="input-text" style="width: 80px;" 
+                                   placeholder="?" required>
+                        </div>
+                        <div class="field-note" style="font-size: 12px; color: #666;">
+                            <?= $block->escapeHtml(__('Please solve the simple math problem above')) ?>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button type="submit" class="action submit primary">
+                            <span><?= $block->escapeHtml(__('Track Order')) ?></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    <?php if ($order): ?>
+        <div class="tracking-result">
+            <h2><?= $block->escapeHtml(__('Order Information')) ?></h2>
+            <div class="order-details">
+                <table class="data-table">
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Order #')) ?></th>
+                        <td><?= $block->escapeHtml($order->getIncrementId()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Order Date')) ?></th>
+                        <td><?= $block->escapeHtml($block->formatDate($order->getCreatedAt(), \IntlDateFormatter::MEDIUM, true)) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Order Status')) ?></th>
+                        <td><?= $block->escapeHtml($order->getStatusLabel()) ?></td>
+                    </tr>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Total')) ?></th>
+                        <td><?= $block->escapeHtml($order->formatPrice($order->getGrandTotal())) ?></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    <?php elseif ($orders && $orders->getSize() > 0): ?>
+        <div class="tracking-result">
+            <h2><?= $block->escapeHtml(__('Orders Information')) ?></h2>
+            <div class="orders-list">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th><?= $block->escapeHtml(__('Order #')) ?></th>
+                            <th><?= $block->escapeHtml(__('Date')) ?></th>
+                            <th><?= $block->escapeHtml(__('Status')) ?></th>
+                            <th><?= $block->escapeHtml(__('Total')) ?></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($orders as $orderItem): ?>
+                            <tr>
+                                <td><?= $block->escapeHtml($orderItem->getIncrementId()) ?></td>
+                                <td><?= $block->escapeHtml($block->formatDate($orderItem->getCreatedAt(), \IntlDateFormatter::MEDIUM, true)) ?></td>
+                                <td><?= $block->escapeHtml($orderItem->getStatusLabel()) ?></td>
+                                <td><?= $block->escapeHtml($orderItem->formatPrice($orderItem->getGrandTotal())) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>
+
+<script type="text/javascript">
+require(['jquery', 'domReady!'], function($) {
+    $('#tracking_type').on('change', function() {
+        var trackingType = $(this).val();
+        var mathCaptchaField = $('#math-captcha-field');
+        var mathCaptchaInput = $('#math_captcha');
+        
+        if (trackingType === 'email' || trackingType === 'mobile') {
+            mathCaptchaField.show();
+            mathCaptchaInput.prop('required', true);
+        } else {
+            mathCaptchaField.hide();
+            mathCaptchaInput.prop('required', false);
+            mathCaptchaInput.val('');
+        }
+    });
+    
+    $('#tracking_type').trigger('change');
+});
+</script>

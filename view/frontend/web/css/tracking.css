@@ -1,0 +1,130 @@
+.magoarab-ordertracking {
+    margin-bottom: 40px;
+
+}
+
+.magoarab-ordertracking .tracking-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.magoarab-ordertracking .tracking-icon {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.magoarab-ordertracking .tracking-title-container {
+    flex: 1;
+}
+
+.magoarab-ordertracking .tracking-form {
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.magoarab-ordertracking .tracking-description {
+    margin-bottom: 20px;
+    color: #666;
+    font-size: 16px;
+}
+
+.magoarab-ordertracking .field {
+    margin-bottom: 20px;
+}
+
+.magoarab-ordertracking .label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.magoarab-ordertracking .control .select,
+.magoarab-ordertracking .control .input-text {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.magoarab-ordertracking .actions-toolbar {
+    margin-top: 25px;
+}
+
+.magoarab-ordertracking .action.submit.primary {
+    background-color: #1979c3;
+    border: 1px solid #1979c3;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.magoarab-ordertracking .action.submit.primary:hover {
+    background-color: #166daf;
+}
+
+.magoarab-ordertracking .tracking-result {
+    margin-top: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.magoarab-ordertracking .tracking-result h2 {
+    color: #1979c3;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.magoarab-ordertracking .data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.magoarab-ordertracking .data-table th,
+.magoarab-ordertracking .data-table td {
+    padding: 12px;
+    border: 1px solid #e1e1e1;
+}
+
+.magoarab-ordertracking .data-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    text-align: left;
+}
+
+.magoarab-ordertracking .data-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.magoarab-ordertracking .data-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* تحسينات للهواتف المحمولة */
+@media (max-width: 767px) {
+    .magoarab-ordertracking .tracking-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .magoarab-ordertracking .tracking-icon {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+}
+
+.magoarab-ordertracking .orders-list {
+    margin-top: 15px;
+}

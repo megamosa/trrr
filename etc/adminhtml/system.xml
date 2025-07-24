@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<config
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="magoarab" translate="label" sortOrder="100">
+			<label>MagoArab</label>
+		</tab>
+		<section id="magoarab_ordertracking" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+			<label>Order Tracking</label>
+			<tab>magoarab</tab>
+			<resource>MagoArab_OrderTracking::config</resource>
+			<group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Settings</label>
+				<field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Module</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Page Title</label>
+				</field>
+				<field id="description" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Page Description</label>
+				</field>
+			</group>
+			<group id="tracking_options" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Tracking Options</label>
+				<field id="allow_order_id" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Allow Order ID Tracking</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="allow_email" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Allow Email Tracking</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="allow_mobile" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Allow Mobile Number Tracking</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="enable_captcha" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable CAPTCHA after failed attempts</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="captcha_threshold" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Failed attempts before CAPTCHA</label>
+					<validate>validate-digits validate-digits-range digits-range-1-10</validate>
+					<depends>
+						<field id="enable_captcha">1</field>
+					</depends>
+				</field>
+				<field id="max_attempts" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Maximum attempts per 15 minutes</label>
+					<comment>Default is 5 attempts</comment>
+					<validate>validate-digits validate-digits-range digits-range-1-20</validate>
+				</field>
+				<field id="lockout_duration" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Lockout duration (minutes)</label>
+					<source_model>MagoArab\OrderTracking\Model\Config\Source\LockoutDuration</source_model>
+				</field>
+				<field id="mobile_validation" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Mobile Number Validation</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<depends>
+						<field id="allow_mobile_tracking">1</field>
+					</depends>
+				</field>
+				<field id="mobile_min_length" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Minimum Mobile Number Length</label>
+					<comment>Default is 10 digits</comment>
+					<validate>validate-digits validate-digits-range digits-range-8-15</validate>
+					<depends>
+						<field id="mobile_validation">1</field>
+					</depends>
+				</field>
+				<field id="mobile_max_length" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Maximum Mobile Number Length</label>
+					<comment>Default is 15 digits</comment>
+					<validate>validate-digits validate-digits-range digits-range-10-20</validate>
+					<depends>
+						<field id="mobile_validation">1</field>
+					</depends>
+				</field>
+				<field id="mobile_allowed_formats" translate="label" type="multiselect" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Allowed Mobile Number Formats</label>
+					<source_model>MagoArab\OrderTracking\Model\Config\Source\MobileFormats</source_model>
+					<depends>
+						<field id="mobile_validation">1</field>
+					</depends>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

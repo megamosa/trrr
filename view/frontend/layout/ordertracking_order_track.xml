@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Order Tracking Results</title>
+        <css src="MagoArab_OrderTracking::css/tracking.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="MagoArab\OrderTracking\Block\Tracking" name="magoarab.ordertracking" template="MagoArab_OrderTracking::tracking/form.phtml" />
+        </referenceContainer>
+    </body>
+</page>

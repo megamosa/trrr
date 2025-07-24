@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MagoArab_OrderTracking::magoarab" title="MagoArab" module="MagoArab_OrderTracking" sortOrder="100" resource="MagoArab_OrderTracking::magoarab"/>
+        <add id="MagoArab_OrderTracking::ordertracking" title="Order Tracking" module="MagoArab_OrderTracking" sortOrder="10" parent="MagoArab_OrderTracking::magoarab" action="adminhtml/system_config/edit/section/magoarab_ordertracking" resource="MagoArab_OrderTracking::config"/>
+    </menu>
+</config>
